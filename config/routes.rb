@@ -1,7 +1,16 @@
 BridgeTasks::Application.routes.draw do
   devise_for :users
+  
+#  devise_scope :user do
+#    root to: "devise/sessions#new"
+#  end
 
-  root to: "tasks#index"
+  #match 'user/:id/tasks' root to: "tasks#index"
+
+  authenticate :user do
+    root to: "tasks#index"
+    resources :tasks
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
