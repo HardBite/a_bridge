@@ -1,21 +1,39 @@
 <h1>Listing tasks</h1>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @tasks.each do |task| %>
-  <tr>
-    <td><%= link_to 'Show', task %></td>
-    <td><%= link_to 'Edit', edit_task_path(task) %></td>
-    <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<% if @tasks_pending %>
+<h2> Active tasks </h2>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th> # </th>
+      <th> Task </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @tasks_pending.each do |task| %>
+        <%= render partial: 'index_row', locals: {task: task} %>
+    <% end %>
+  </tbody>
 </table>
+<% end %>
 
 <br />
 
 <%= link_to 'New Task', new_task_path %>
+
+<% if @tasks_completed %>
+<h2> Completed tasks </h2>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th> # </th>
+      <th> Task </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks_completed.each do |task| %>
+        <%= render partial: 'index_row', locals: {task: task} %>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

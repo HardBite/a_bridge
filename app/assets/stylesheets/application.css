@@ -11,3 +11,25 @@
  *= require_self
  *= require_tree .
  */
+ 
+.edit-delete-links {
+	visibility: hidden;
+	margin-left: 5px;
+}
+
+.task-title > a {
+	margin-right: 20px;
+}
+
+tbody {
+	counter-reset: rowNumber
+}
+
+tbody td.number::before {
+	counter-increment: rowNumber;
+	content: counter(rowNumber) ".";
+}
+
+.task-title:hover > .edit-delete-links {
+	visibility: visible;
+}
