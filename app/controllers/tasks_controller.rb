@@ -19,8 +19,8 @@ class TasksController < ApplicationController
 
 
   def index
-    @tasks_pending = @user.tasks.where("status = 'pending'")
-    @tasks_completed = @user.tasks.where("status = 'completed'")
+    @tasks_pending = @user.tasks.pending
+    @tasks_completed = @user.tasks.completed
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @tasks }

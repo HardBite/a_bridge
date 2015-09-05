@@ -16,7 +16,7 @@
 //= require_tree .
 
 $(document).ready(function () {
-  
+
   var moveRow = function (checkbox) {
     var target_url = "tasks/" + $(checkbox).attr('id')
     var new_status = ""
@@ -30,7 +30,8 @@ $(document).ready(function () {
       url: target_url,
       dataType: "json",
       data: {"task": {"status": new_status}},
-      success: function () {
+      success: function(response) {
+        console.log(response)
         if ($(checkbox).is(":checked")) {
           console.log('checked')
           $(checkbox).closest("tr").remove().clone().prependTo("#completed tbody");
@@ -40,9 +41,17 @@ $(document).ready(function () {
         }
         console.log('function must go on')
         grabCheckboxes()
+      },
+      error: function() {
+        $(checkbox).closest('tr').before("<tr class='due-date-error'><td></td><td><p> You can not mark this task as incomplete because it was due to date wich passed. Change due date first.</p> </td> <td></td> </tr>");
+        $(".due-date-error").fadeOut(2500).destroy;
+        $(checkbox).prop('checked', 'checked');
+        grabCheckboxes()
+
       }
     })
   }
+  
   var grabCheckboxes = function () {
     $(".completed").off().on('click', function () {
       moveRow($(this))
