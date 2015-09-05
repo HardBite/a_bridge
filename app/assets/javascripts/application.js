@@ -14,3 +14,41 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+$(document).ready(function () {
+  
+  var moveRow = function (checkbox) {
+    var target_url = "tasks/" + $(checkbox).attr('id')
+    var new_status = ""
+    var old_status = $(checkbox).closest('table').attr('id')
+    if (old_status == 'completed')
+    	{new_status = 'pending'}
+    else {new_status = 'completed'}
+    
+    $.ajax({
+      type: "PUT",
+      url: target_url,
+      dataType: "json",
+      data: {"task": {"status": new_status}},
+      success: function () {
+        if ($(checkbox).is(":checked")) {
+          console.log('checked')
+          $(checkbox).closest("tr").remove().clone().prependTo("#completed tbody");
+        } else {
+          console.log('unchecked')
+          $(checkbox).closest("tr").remove().clone().prependTo("#pending tbody");
+        }
+        console.log('function must go on')
+        grabCheckboxes()
+      }
+    })
+  }
+  var grabCheckboxes = function () {
+    $(".completed").off().on('click', function () {
+      moveRow($(this))
+    })
+    console.log('event listeners attached')
+  }
+  
+  grabCheckboxes();
+});

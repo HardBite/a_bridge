@@ -1,8 +1,16 @@
 <tr>
         <td class="number"> </td>
         <td class="task-title">
-          <a href="<% link_to 'Show', task %>"> <%= task.title %> </a>
-          <span class="edit-delete-links"> <%= link_to 'Edit', edit_task_path(task) %> </span>
-          <span class="edit-delete-links">  <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %> </span>
+          <%= link_to task.title, user_task_path(@user.id, task) %>
+          <span class="edit-delete-links"> <%= link_to 'Edit', edit_user_task_path(@user.id, task) %> </span>
+          <span class="edit-delete-links">  <%= link_to 'Destroy', user_task_path(@user.id, task), method: :delete, data: { confirm: 'Are you sure?' } %> </span>
+        </td>
+        <td>
+        	<input class="form-control completed" id="<%=task.id %>" type="checkbox" <% if task.status == "completed" %>
+        						checked
+        					<% end %>
+
+        						/>
+
         </td>
       </tr>

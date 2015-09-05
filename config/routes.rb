@@ -7,9 +7,12 @@ BridgeTasks::Application.routes.draw do
 
   #match 'user/:id/tasks' root to: "tasks#index"
 
+  
   authenticate :user do
     root to: "tasks#index"
-    resources :tasks
+    resources :users do
+      resources :tasks
+    end
   end
   # The priority is based upon order of creation:
   # first created -> highest priority.

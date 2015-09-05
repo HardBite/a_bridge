@@ -1,5 +1,21 @@
 <p id="notice"><%= notice %></p>
 
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2><%= @task.title %> </h2>
+	</div>
+	<ul class="list-group">
+		<li class="list-group-item"> <strong> Task priority: </strong> <%= @task.priority %> </li>
+		<li class="list-group-item"> <strong> Task Due To: </strong> <%= @task.due_date %> </li>
+	</ul>
+			
+		
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+	<div class="panel body">
+	<p> <strong> Task description :</strong> </p>
+	<p> <%= @task.description %> </p>
+	</div>
+</div>
+
+<%= link_to 'Edit', edit_user_task_path(@user, @task) %> |
+<%= link_to 'Back', user_tasks_path(@user) %>
