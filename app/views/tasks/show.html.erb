@@ -7,14 +7,13 @@
 	<ul class="list-group">
 		<li class="list-group-item"> <strong> Task priority: </strong> <%= @task.priority %> </li>
 		<li class="list-group-item"> <strong> Task Due To: </strong> <%= @task.due_date %> </li>
-	</ul>
+	
 			
 		
 
-	<div class="panel body">
-	<p> <strong> Task description :</strong> </p>
-	<p> <%= @task.description %> </p>
-	</div>
+	<li class="list-group-item"> <strong> Task description :</strong> 
+	<p> <%= @task.description %> </p> </li>
+	</ul>
 </div>
 
 <%= link_to 'Edit', edit_user_task_path(@user, @task) %> |

@@ -1,16 +1,19 @@
 <tr>
-        <td class="number"> </td>
-        <td class="task-title">
-          <%= link_to task.title, user_task_path(@user.id, task) %>
-          <span class="edit-delete-links"> <%= link_to 'Edit', edit_user_task_path(@user.id, task) %> </span>
-          <span class="edit-delete-links">  <%= link_to 'Destroy', user_task_path(@user.id, task), method: :delete, data: { confirm: 'Are you sure?' } %> </span>
-        </td>
-        <td>
-        	<input class="form-control completed" id="<%=task.id %>" type="checkbox" <% if task.status == "completed" %>
-        						checked='checked'
-        					<% end %>
-
-        						>
-
-        </td>
-      </tr>
+	<td class="number"> </td>
+	<td class="task-title">
+	  <%= link_to task.title, user_task_path(@user.id, task) %>
+	  <span class="edit-delete-links"> <%= link_to 'Edit', edit_user_task_path(@user.id, task) %> </span>
+	  <span class="edit-delete-links">  <%= link_to 'Destroy', user_task_path(@user.id, task), method: :delete, data: { confirm: 'Are you sure?' } %> </span>
+	</td>
+	<td>
+	  	<div class="chkboxCompleted">	
+			<input type="checkbox" class="chkboxCompleted"
+			id="<%= user_task_path(@user.id, task) %>" <% if task.status == "completed" %>
+							checked='checked'
+						<% end %>>
+			<label for="<%= user_task_path(@user.id, task) %>"> </label>
+		</div>
+	</td>
+	<td class="delete">
+	</td>
+</tr>

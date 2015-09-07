@@ -13,11 +13,14 @@ class TasksController < ApplicationController
     begin
       @task = @user.tasks.find(params[:id])
     rescue ActiveRecord::RecordNotFound
-      redirect_to user_tasks_url, alert: "Task you requested eihter does not exist or doesn't belong to you" 
+      redirect_to user_tasks_url, alert: "Task you requested either does not exist or doesn't belong to you" 
     end
   end
 
-
+  def welcome
+    redirect_to user_tasks_url
+  end
+  
   def index
     @tasks_pending = @user.tasks.pending
     @tasks_completed = @user.tasks.completed

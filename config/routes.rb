@@ -5,9 +5,6 @@ BridgeTasks::Application.routes.draw do
 #    root to: "devise/sessions#new"
 #  end
 
-  #match 'user/:id/tasks' root to: "tasks#index"
-
-  
   authenticate :user do
     root to: "tasks#index"
     resources :users do
