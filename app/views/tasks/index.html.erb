@@ -1,22 +1,26 @@
 <h1>Listing tasks</h1>
 
 <h2> Active tasks </h2>
+<%= form_tag delete_multiple_user_tasks_path, method: :delete do |f| %>
 <table class="table table-striped table-hover" id="pending">
   <thead>
     <tr>
       <th> # </th>
       <th> Task </th>
       <th> Completed </th>
-      <th> Delete </th>
+      <th> <%= submit_tag value= "Delete", class: "btn btn-sm btn-danger", data: { confirm: "Are you sure to you want to delete selected tasks?"} %>
+      </th>
 
     </tr>
   </thead>
   <tbody>
   <% @tasks_pending.each do |task| %>
-        <%= render partial: 'index_row', locals: {task: task} %>
+        <%= render partial: 'index_row', locals: {task: task, f: f} %>
     <% end %>
+  
   </tbody>
 </table>
+<% end %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -25,18 +29,21 @@
 </div>
 
 <h2> Completed tasks </h2>
+<%= form_tag delete_multiple_user_tasks_path, method: :delete do |f| %>
   <table class="table table-striped table-hover" id="completed">
     <thead>
       <tr>
         <th> # </th>
         <th> Task </th>
         <th> Completed </th>
-        <th> Delete </th>
+        <th> <%= submit_tag value= "Delete", class: "btn btn-sm btn-danger", data: { confirm: "Are you sure to you want to delete selected tasks?"} %>
+        </th>
       </tr>
     </thead>
     <tbody>
       <% @tasks_completed.each do |task| %>
-          <%= render partial: 'index_row', locals: {task: task} %>
+          <%= render partial: 'index_row', locals: {task: task, f: f} %>
       <% end %>
     </tbody>
   </table>
+  <% end %>

@@ -17,9 +17,7 @@ class TasksController < ApplicationController
     end
   end
 
-  def welcome
-    redirect_to user_tasks_url
-  end
+
   
   def index
     @tasks_pending = @user.tasks.pending
@@ -33,7 +31,6 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @task }
@@ -59,7 +56,6 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(params[:task])
-
     respond_to do |format|
       if @task.save
         format.html { redirect_to user_tasks_url, notice: 'Task was successfully created.' }
@@ -89,10 +85,15 @@ class TasksController < ApplicationController
   # DELETE /tasks/1.json
   def destroy
     @task.destroy
-
     respond_to do |format|
       format.html { redirect_to user_tasks_url }
       format.json { head :no_content }
     end
+  end
+
+  def delete_multiple
+    tasks = @user.tasks.find(params[:tasks])
+    Task.delete(tasks)
+    redirect_to user_tasks_url
   end
 end

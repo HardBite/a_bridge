@@ -36,7 +36,7 @@ $(document).ready(function () {
         } else {
           $(checkbox).closest("tr").remove().clone().prependTo("#pending tbody");
         }
-        grabCheckboxes()
+        grabCompletedCheckboxes()
       },
       error: function(request, status, error) {
         console.log(request.responseText)
@@ -45,19 +45,19 @@ $(document).ready(function () {
           $(checkbox).before('<div class="due-date-error"> <div class="alert alert-danger" role="alert"><span class="alert"> Due date have passed! </span></div></div>');
 
           $(".due-date-error").delay(800).fadeOut(1000).destroy;}
-          
+
         $(checkbox).prop('checked', 'checked');
-        grabCheckboxes()
+        grabCompletedCheckboxes()
 
       }
     })
   }
   
-  var grabCheckboxes = function () {
+  var grabCompletedCheckboxes = function () {
     $("input.chkboxCompleted").off().on('click', function () {
       moveRow($(this))
     })
   }
   
-  grabCheckboxes();
+  grabCompletedCheckboxes();
 });

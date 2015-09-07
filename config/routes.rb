@@ -8,7 +8,12 @@ BridgeTasks::Application.routes.draw do
   authenticate :user do
     root to: "tasks#index"
     resources :users do
-      resources :tasks
+      resources :tasks do
+        collection do
+          delete 'delete_multiple'
+        end
+      end
+
     end
   end
   # The priority is based upon order of creation:
