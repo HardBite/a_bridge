@@ -44,12 +44,30 @@ $(document).ready(function () {
 
           $(checkbox).before('<div class="due-date-error"> <div class="alert alert-danger" role="alert"><span class="alert"> Due date have passed! </span></div></div>');
 
-          $(".due-date-error").delay(800).fadeOut(1000).destroy;}
+          $(".due-date-error").delay(800).fadeOut(1000).remove();}
 
         $(checkbox).prop('checked', 'checked');
         grabCompletedCheckboxes()
 
       }
+    })
+  };
+
+  var deleteTask = function (href) {
+    var target_url = href.prop("href")
+    console.log(target_url);
+
+      $.ajax({
+      type: "DELETE",
+      url: target_url,
+      dataType: "json",
+      data: {},
+      success: function(response) {
+        href.closest("tr").fadeOut(1000).remove()
+      },
+      error: function(request, status, error) {
+        console.log(request.responseText)}
+    
     })
   }
   
@@ -57,7 +75,98 @@ $(document).ready(function () {
     $("input.chkboxCompleted").off().on('click', function () {
       moveRow($(this))
     })
+  };
+
+  var grabDeleteCheckboxes = function(table) {
+    return table.find("input#tasks_")
+  };
+
+  var deleteCheckedRows = function() {
+    $("input#tasks_").each(function() {
+      if ($(this).is(":checked")) {
+        console.log($(this))
+          $(this).closest("tr").fadeOut(500).remove()}
+    });
+    grabDeleteButton;
+    };
+
+  
+
+  var selectAll = function(link) {
+    var table = link.closest("table")
+    var chkboxes = grabDeleteCheckboxes(table)
+    console.log(chkboxes)
+    chkboxes.each(function() {
+      $(this).prop("checked", true)
+    })
+  }
+
+  var selectNone = function(link) {
+    var table = link.closest("table")
+    var chkboxes = grabDeleteCheckboxes(table)
+    console.log(chkboxes)
+    chkboxes.each(function() {
+      $(this).prop("checked", false)
+    })
   }
   
+
+  var grabSelectAllLink = function () {
+    $("a.select-all").off().on('click', function(e) {
+      e.preventDefault();
+      selectAll($(this));
+      
+    })
+  };
+
+  var grabSelectNoneLink = function () {
+    $("a.select-none").off().on('click', function(e) {
+      e.preventDefault();
+      selectNone($(this));
+    })
+  };
+
+  var grabDeleteLink = function () {
+    $("a[data-method='delete']").on('click', function() {
+      deleteTask($(this));
+      return false;
+    })
+  };
+
+
+
+  var grabDeleteButton = function(){
+    $("input[value='Delete']").off().on('click', function(event){
+      event.preventDefault();
+      var params = event.target.closest("form");
+      params = $(params).serializeArray();
+      var target_url = event.target.closest("form").getAttribute('action');
+
+      console.log(params)
+
+      $.ajax({
+        type: "DELETE",
+        url: target_url,
+        dataType: "json",
+        data: params,
+        success: function(response) {
+          console.log('OK')
+          deleteCheckedRows()
+        },
+        error: function(request, status, error) {
+          console.log(error)}
+    
+    });
+      params = undefined
+
+    })
+  };
+
+
+  
   grabCompletedCheckboxes();
+  grabSelectAllLink();
+  grabSelectNoneLink();
+  grabDeleteLink();
+  grabDeleteButton();
 });

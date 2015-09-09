@@ -34,6 +34,16 @@ tbody td.number::before {
 	visibility: visible;
 }
 
+div.button {
+	display: block;
+}
+div.links {
+	font-size: 11px;
+	display: block;
+}
+
+
+
 div .due-date-error {
 	position: relative;
 	top: -10px;
@@ -41,6 +51,10 @@ div .due-date-error {
 	width: 200px;
 	z-index: 2;
 	
+}
+
+th.centered {
+	text-align: center;
 }
 
 

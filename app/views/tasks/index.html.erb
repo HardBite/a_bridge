@@ -7,8 +7,12 @@
     <tr>
       <th> # </th>
       <th> Task </th>
-      <th> Completed </th>
-      <th> <%= submit_tag value= "Delete", class: "btn btn-sm btn-danger", data: { confirm: "Are you sure to you want to delete selected tasks?"} %>
+      <th class="centered"> Completed </th>
+      <th class="centered"> <%= submit_tag value= "Delete", class: "btn btn-sm btn-danger", data: { confirm: "Are you sure to you want to delete selected tasks?"} %>
+        <div class="links">
+        Select:
+          <a class="select-all" href=""> All </a> | <a class="select-none" href=""> None </a> 
+        </div>
       </th>
 
     </tr>
@@ -35,8 +39,12 @@
       <tr>
         <th> # </th>
         <th> Task </th>
-        <th> Completed </th>
-        <th> <%= submit_tag value= "Delete", class: "btn btn-sm btn-danger", data: { confirm: "Are you sure to you want to delete selected tasks?"} %>
+        <th class="centered"> Completed </th>
+        <th class="centered"> <%= submit_tag value= "Delete", class: "btn btn-sm btn-danger", data: { confirm: "Are you sure to you want to delete selected tasks?"} %>
+        <div class="links">
+        Select:
+          <a class="select-all" href=""> All </a> | <a class="select-none" href=""> None </a> 
+        </div>
         </th>
       </tr>
     </thead>
