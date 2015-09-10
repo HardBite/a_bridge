@@ -162,8 +162,64 @@ $(document).ready(function () {
     })
   };
 
+/*http://blog.niklasottosson.com/?p=1914 */
 
-  
+
+  function sortTable(table, order){
+    var rows = $(table).find('tbody').find('tr');
+    console.log(rows)
+
+    rows.sort(function(a, b) {
+
+    var A = $(a).children('td').eq(1).text().toUpperCase();
+    var B = $(b).children('td').eq(1).text().toUpperCase();
+
+    if(A < B) {
+      return (-1*order);
+    }
+
+    if(A > B) {
+      return (1*order);
+    }
+
+    return (0*order);
+
+    });
+
+    $.each(rows, function(index, row) {
+      $(table).children('tbody').append(row);
+    });
+  }
+
+
+
+  var grabSortLink = function() {
+    $("a.title-sort-link").on("click", function(e) {
+      e.preventDefault();
+      var table = $(this).closest('table');
+      if ($(this).hasClass('reverse')) {
+        order = -1
+        sortTable(table, order);
+        $(this).removeClass('reverse')
+        $(this).addClass('direct')
+        $(this).next().removeClass('glyphicon glyphicon-arrow-down')
+        $(this).next().addClass('glyphicon glyphicon-arrow-up')
+
+      }
+      else {
+        order = 1
+        sortTable(table, order);
+        $(this).removeClass('direct')
+        $(this).addClass('reverse')
+        $(this).next().removeClass('glyphicon glyphicon-arrow-up')
+        $(this).next().addClass('glyphicon glyphicon-arrow-down')
+
+      }
+    })
+  }
+
+
+  grabSortLink();
   grabCompletedCheckboxes();
   grabSelectAllLink();
   grabSelectNoneLink();
