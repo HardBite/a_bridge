@@ -214,11 +214,58 @@ $(document).ready(function () {
         $(this).next().removeClass('glyphicon glyphicon-arrow-up')
         $(this).next().addClass('glyphicon glyphicon-arrow-down')
 
-      }
+      };
+    });
+  };
+
+  var formValidate = function (form) {
+    var isValid = true
+
+    var title = form.find("input#task_title")[0]
+    if (title.value.length == 0)
+      {markErroneous(title, "Can't be blank");
+      isValid=false;}
+
+    var priority = form.find("input#task_priority")[0]
+    if (!$.isNumeric(priority.value))
+      {markErroneous(priority, "Should be a number");
+      isValid=false}
+
+    var year = form.find("select#task_due_date_1i")[0]
+    var month = form.find("select#task_due_date_2i")[0]
+    var day = form.find("select#task_due_date_3i")[0]
+    var selectedDate = new Date($(year).val(), $(month).val()-1, $(day).val(), 0, 0, 0)
+    var now = new Date()
+    console.log(selectedDate - now)
+    if ((selectedDate - now) < 0)
+      {markErroneous(year, "Should be a future date");
+      isValid=false}
+  return isValid
+
+
+
+
+    
+  };
+
+  var markErroneous = function (field, errorText) {
+    var divField = $(field).closest("div.form-group")
+    divField.addClass("field-error")
+    divField.append('<p class="error-text">' + errorText + '</p>')
+
+ };
+
+  var grabNewTaskSubmit = function () {
+    $('input[value="Create Task"]').on('click', function(event) {
+      var form = $(this).closest('form')
+      form.find('p.error-text').remove()
+      $('div.field-error').removeClass("field-error")
+      if (!formValidate($(this).closest('form')))
+        {event.preventDefault()};
     })
   }
 
-
+  grabNewTaskSubmit();
   grabSortLink();
   grabCompletedCheckboxes();
   grabSelectAllLink();

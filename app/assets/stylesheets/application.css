@@ -53,6 +53,17 @@ div .due-date-error {
 	
 }
 
+div .field-error {
+	border: 3px solid red;
+	border-radius: 12px;
+}
+
+div .error-text {
+	font-size: larger;
+	color: red;
+	margin-left: 10px;
+}
+
 th.centered {
 	text-align: center;
 }
