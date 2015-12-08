@@ -84,7 +84,6 @@ $(document).ready(function () {
   var deleteCheckedRows = function() {
     $("input#tasks_").each(function() {
       if ($(this).is(":checked")) {
-        console.log($(this))
           $(this).closest("tr").fadeOut(500).remove()}
     });
     grabDeleteButton;
@@ -142,7 +141,6 @@ $(document).ready(function () {
       params = $(params).serializeArray();
       var target_url = event.target.closest("form").getAttribute('action');
 
-      console.log(params)
 
       $.ajax({
         type: "DELETE",
@@ -263,7 +261,27 @@ $(document).ready(function () {
       if (!formValidate($(this).closest('form')))
         {event.preventDefault()};
     })
-  }
+  };
+
+  var grabLogoutButton = function () {
+    $('a[href="/users/sign_out"]').off().on('click', function(event) {
+      event.preventDefault();
+      $.ajax({
+        type: "DELETE",
+        url: '/users/sign_out',
+        dataType: "json",
+        data: "",
+        success: function(response) {
+          console.log('OK');
+          window.location.href = "/users/sign_in";
+
+        },
+        error: function(request, status, error) {
+          console.log(error)}
+    
+      });
+    })
+  };
 
   grabNewTaskSubmit();
   grabSortLink();
@@ -272,4 +290,5 @@ $(document).ready(function () {
   grabSelectNoneLink();
   grabDeleteLink();
   grabDeleteButton();
+  grabLogoutButton();
 });

@@ -5,7 +5,10 @@ class User < ActiveRecord::Base
          :rememberable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
   has_many :tasks, dependent: :destroy
-  attr_accessible :email, :first_name, :last_name
+
+  def full_name
+  	return "#{self.first_name} #{self.last_name}"
+  end
 end
