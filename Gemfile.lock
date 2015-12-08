@@ -45,6 +45,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.6.0)
     hike (1.2.3)
@@ -88,6 +89,23 @@ GEM
       json (~> 1.4)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
+    rspec-core (3.4.1)
+      rspec-support (~> 3.4.0)
+    rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-mocks (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-rails (3.4.0)
+      actionpack (>= 3.0, < 4.3)
+      activesupport (>= 3.0, < 4.3)
+      railties (>= 3.0, < 4.3)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
     sass (3.4.18)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -120,6 +138,7 @@ DEPENDENCIES
   devise
   jquery-rails
   rails (= 3.2.13)
+  rspec-rails
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)
