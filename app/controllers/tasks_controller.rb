@@ -20,11 +20,13 @@ class TasksController < ApplicationController
 
   
   def index
-    puts 'PARAMS'
-    puts params
     if not params.has_key?(:user_id)
       return redirect_to user_tasks_path(:user_id => @user.id)
+    elsif params[:user_id] != @user.id.to_s
+      flash[:alert] = "You don't have to peek on otehrs tasks!"
+      return redirect_to user_tasks_path(:user_id => @user.id)
     end
+
     @tasks_pending = @user.tasks.pending
     @tasks_completed = @user.tasks.completed
     respond_to do |format|
