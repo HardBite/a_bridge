@@ -10,18 +10,39 @@ priorities = (1..10).to_a
 
 statuses = ['pending', 'completed']
 
-users_id = [2]
+users_id=[]
+
+user_1 = User.create(first_name: 'Paul', last_name: 'Verchoven',
+					email: 'paul@test.com', password: 'password')
+user_1.confirm!
+users_id << user_1.id
+
+user_2 = User.create(first_name: 'Piotr', last_name: 'Piatochkin',
+					email: 'piotr@test.com', password: 'password')
+user_2.confirm!
+users_id << user_2.id
+
+user_3 = User.create(first_name: 'Test', last_name: 'Testovich',
+					email: 'test@test.com', password: 'password')
+user_3.confirm!
+users_id << user_3.id
+
+
+
+
 
 adj = ['Important ', 'Unimortant ', 'Dull ', 'Jolly ', 'Cool ', 'Marvellous ']
 noun_1 = ['task ', 'job ', 'work ', 'obligation ', 'nesessity ']
 verb = ['water ', 'boil ', 'cook ', 'read ', 'paint ', 'wait for ', 'carve ', 'wash ', 'write ', 'polish ']
-noun_2 = ['flowers', 'eggs', 'checken', 'garage', 'bus', 'walking stick', 'hands', 'novel', 'boot']
+noun_2 = ['flowers', 'eggs', 'chicken', 'garage', 'bus', 'walking stick', 'hands', 'novel', 'boot']
 
 # Due tasks
 
-60.times {
-	tit = adj.sample + noun_1.sample + 'to ' + verb.sample + 'the ' + noun_2.sample
-Task.create("description"=> lorem_ipsum, "due_date"=>dates.sample,
-			 "priority"=> priorities.sample, "status"=>statuses.sample,
-			  "title"=>tit, "user_id"=>users_id.sample)
-}
+for user_id in users_id do
+	7.times {
+		tit = adj.sample + noun_1.sample + 'to ' + verb.sample + 'the ' + noun_2.sample
+	Task.create("description"=> lorem_ipsum, "due_date"=>dates.sample,
+				 "priority"=> priorities.sample, "status"=>statuses.sample,
+				  "title"=>tit, "user_id"=>users_id)
+	}
+end
